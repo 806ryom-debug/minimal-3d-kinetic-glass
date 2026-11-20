@@ -1,0 +1,67 @@
+# 最小3D運動学的ガラス転移と老化分岐モデル
+
+多体角度ポテンシャルを必要とせず、単純なミクロ規則のみから「運動学的ガラス転移（動的凍結）」「冷却速度によるガラス・結晶の分岐」「老化分岐（Aging Bifurcation）」が創発することを示す3D粒子シミュレーションおよび平均場理論の検証コード集です。
+
+## 概要（Overview）
+
+本リポジトリでは、以下の4つの基本要素から成る最小モデルを用いて、アモルファスネットワークの動的凍結、結晶化、およびマクロストレス場との結合による老化ダイナミクスを再現します。
+
+1. **短距離結合引力** ($\beta$)
+2. **次数依存の有効質量** ($M_{\mathrm{eff}} = 1 + \alpha k$ による運動学的拘束)
+3. **剛体球の排除体積効果** ($r_{\mathrm{excl}}$)
+4. **熱揺らぎ** ($\sigma$)
+
+---
+
+## ファイル構成（Repository Structure）
+
+ルート直下には英語版スクリプトを配置し、本ディレクトリ（`jp/`）に日本語コメント版を収録しています。
+
+* `01_ablation_study_with_msd_ja.py` — 有効質量と短距離引力の役割を切り分けるアブレーション実験。3D空間配置、ペア分布関数 $g(r)$、共通近傍分析（CNA）、および平均二乗変位（MSD）を用いて動的凍結を定量評価します。
+* `02_same_density_glass_vs_crystal_ja.py` — **同一の充填率（$\phi \approx 48\%$）および同一のミクロ規則**のもと、冷却速度（熱履歴）のみを変えた場合の**急冷ガラス（Quenched Glass）**と**徐冷結晶（Annealed Crystal）**の比較シミュレーションです。
+* `03_mean_field_ode_validation_ja.py` — 3D粒子シミュレーション（$N=250$）と、2変数非線形平均場常微分方程式（$\langle k \rangle(t), V_{\mathrm{top}}(t)$）の比較検証。恒常的なリミットサイクル振動から老化ガラス固定点へと遷移するサドルノード分岐を再現します。
+
+---
+
+## シミュレーション結果（Results & Figures）
+
+### 1. アブレーション実験と動的凍結指標（MSD）
+```bash
+python jp/01_ablation_study_with_msd_ja.py
+```
+![Ablation Study](../figures/ablation_study_with_msd.png)
+
+### 2. 同一密度・同一規則下での冷却速度によるガラス・結晶の分岐
+```bash
+python jp/02_same_density_glass_vs_crystal_ja.py
+```
+![Same Density Glass vs Crystal](../figures/same_density_glass_vs_crystal.png)
+
+### 3. 理論検証：3D粒子シミュレーション vs 2変数平均場ODE
+```bash
+python jp/03_mean_field_ode_validation_ja.py
+```
+![Mean-Field ODE Validation](../figures/mean_field_ode_validation.png)
+
+---
+
+## 実行環境・セットアップ（Requirements & Quick Start）
+
+Python 3.9 以上、および `numpy` と `matplotlib` のみで動作します。
+
+```bash
+git clone https://github.com<your-username>/minimal-3d-kinetic-glass.git
+cd minimal-3d-kinetic-glass
+pip install -r requirements.txt
+```
+
+markdown
+## 出典・引用（Citation & Attribution）
+
+本コードおよび図表は、**出典を明記いただければ、個人利用・研究利用・商用利用を問わずすべて無償**で自由にご利用・改変いただけます。論文・発表・Web記事等で使用される場合は、以下のように出典を明記してください。
+
+> <Ryo Muramoto(2026). *Minimal Kinetic 3D Glassification & Aging Bifurcation*. GitHub: https://github.com<your-username>/minimal-3d-kinetic-glass
+
+## ライセンス（License）
+
+本プロジェクトは **MIT License** のもとで公開されています（詳細は [LICENSE](../LICENSE) 
